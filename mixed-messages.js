@@ -9,3 +9,4 @@ const factionArr = ["Children of Mamon", "Consortium of Phyta", "Chavvah", "Cult
 const affinityArr = ["friendly", "neutral", "hostile"];
 const healthStatusArr = ["Perfect", "Fine", "Injured", "Wounded", "Badly Wounded"];
 const statusEffectsArr = ["asleep", "blind", "cleaved", "confused", "covered in liquid", "dazed", "deep dreaming", "dioriented", "emboldened", "frenzied", "frozen", "gleaming", "greased", "hobbled", "inspired", "lost", "lovesick", "mutating", "overburdened", "paralyzed", "phased", "phosphorescent", "prone", "proselytized", "psionocially cleaved", "shaken", "shamed", "shimmering", "sitting", "sluggish", "sprinting", "stained by liquid", "stuck", "stunned", "stunned by gas", "submerged", "syphoned", "terrified", "wakeful"];
+const difficultyArr = ["Easy", "Average", "Tough", "Very Tough", "Impossible"];
