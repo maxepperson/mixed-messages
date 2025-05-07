@@ -53,7 +53,7 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
         },
         
         generateEquipment() {
-            let equipMessage = 'Equipped: ';
+            let equipMessage = "Equipped: ";
             const equipRangedWeapon = getRandomElement(rangedWeaponArr);
 
             const equipMeleeArr = [];
@@ -68,9 +68,31 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
 
             equipMessage += "" + equipRangedWeapon;
             return equipMessage;
-            
-        }
+        },
 
+        generateStatusEffects() {
+            let statusEffectMessage = "";
+            const activeStatusEffects = [];
+            const numEffects = randomNumber(5);
+
+            for (let i = 0; i < numEffects; i++){
+                let currentEffect = getRandomElement(statusEffectsArr);
+                while (activeStatusEffects.includes(currentEffect)) {
+                    currentEffect = getRandomElement(statusEffectsArr);
+                }
+
+                activeStatusEffects.push(currentEffect);
+
+                if (i == numEffects - 1) {
+                    statusEffectMessage += "" + currentEffect;
+                }
+                else{
+                    statusEffectMessage += "" + currentEffect + ", ";
+                }
+            }
+
+            return statusEffectMessage;
+        }
     }
 }
 
