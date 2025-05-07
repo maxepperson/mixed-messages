@@ -11,7 +11,12 @@ const healthStatusArr = ["Perfect", "Fine", "Injured", "Wounded", "Badly Wounded
 const statusEffectsArr = ["asleep", "blind", "cleaved", "confused", "covered in liquid", "dazed", "deep dreaming", "dioriented", "emboldened", "frenzied", "frozen", "gleaming", "greased", "hobbled", "inspired", "lost", "lovesick", "mutating", "overburdened", "paralyzed", "phased", "phosphorescent", "prone", "proselytized", "psionocially cleaved", "shaken", "shamed", "shimmering", "sitting", "sluggish", "sprinting", "stained by liquid", "stuck", "stunned", "stunned by gas", "submerged", "syphoned", "terrified", "wakeful"];
 const difficultyArr = ["Easy", "Average", "Tough", "Very Tough", "Impossible"];
 
-const characterFactory = (gender, pronouns, calling, limbType, location, faction, affinity, healthStatus, statusEffects, difficulty) => {
+const meleeWeaponArr = ["pickaxe", "hand axe", "vinereaper", "battle axe", "mace", "staff", "hammer", "club", "wrench", "baton", "war hammer", "maul", "long sword", "great sword", "dagger", "kris", "utility knife", "kukri", "butcher knife", "cleaver", "wristblade"];
+const weaponMaterialArr = ["bronze", "iron", "steel", "carbide", "fullerite", "crysteel", "zetachrome"];
+const rangedWeaponArr = ["short bow", "compound bow", "musket", "Issachar rifle", "combat shotgun", "pump shotgun", "sniper rifle", "carbine", "laser rifle", "freeze ray", "eigenrifle", "hypertractor", "light rail", "spaser rifle", "dart gun", "booster gun", "chrome revolver", "grappling gun", "semi-automatic pistrol", "laser pistol", "chain pistol", "arc winder", "eigenpistol", "nullray pistol", "di-thermo beam", "hand rail", "high-voltage arc winder", "psychal fleshgun", "space inverter", "spaser pistol", "grenade launcher", "fungicide pump", "defoilant pump", "chaingun", "mortar tube", "missile launcher", "flamerthrower", "arc cannon", "chain laser", "blast cannon", "linear cannon", "swarm rack", "phase cannon"];
+
+
+const characterFactory = (gender, pronouns, calling, limbType, location, faction, affinity, healthStatus, statusEffects, difficulty, weaponArr, equipmentArr) => {
     return {
         gender,
         pronouns,
@@ -23,6 +28,7 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
         healthStatus,
         statusEffects,
         difficulty,
+        weaponArr,
 
         titleCase(str) {
             return str.toLowerCase().split(' ').map(function (word) {
