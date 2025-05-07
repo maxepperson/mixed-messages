@@ -67,6 +67,7 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
             }
 
             equipMessage += "" + equipRangedWeapon;
+            console.log(equipMessages);
             return equipMessage;
         },
 
@@ -90,10 +91,10 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
                     statusEffectMessage += "" + currentEffect + ", ";
                 }
             }
-
+            console.log(statusEffectMessage);
             return statusEffectMessage;
         }
     }
 }
 
-//console.log('hello');
+console.log('hello');
