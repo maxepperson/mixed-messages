@@ -7,7 +7,7 @@ const limbTypeArr = ["arm", "claw", "hoof", "wing", "tentacle", "fin", "fungal o
 const locationArr = ["Asphalt Mines", "Bethesda Susa", "Bey Lah", "Eyn Roj", "Ezra", "Garden of Geth", "Golgotha", "Grit Gate", "Gyl", "Joppa", "Kyakukya", "Omonporch", "Red Rock", "ruins of Joppa", "Rust Wells", "Rusted Archway", "Six Day Stilt", "Stiltgrounds", "the hydropon", "Thin World", "Tomb of the Eaters", "Trembling Dunes", "waterlogged tunnel", "Yd Freehold"];
 const factionArr = ["Children of Mamon", "Consortium of Phyta", "Chavvah", "Cult of the Coiled Lamb", "Daughters of Exile", "dromad merchants", "cannibals", "Barathrumites", "Farmer's Guild", "Fellowship of Wardens", "Glow-Wights", "grazing hedonists", "Gyre wights", "hindren of Bey Lah", "Issachari tribe", "Mechanamists", "Merchants' Guild", "Naphtaali tribe", "pariahs", "Putus Templar", "Seekers of the Sightless Way", "Sultan cult", "water barons"];
 const affinityArr = ["friendly", "neutral", "hostile"];
-const healthStatusArr = ["Perfect", "Fine", "Injured", "Wounded", "Badly Wounded"];
+const healthStatusArr = ["perfect", "fine", "injured", "wounded", "badly wounded"];
 const statusEffectsArr = ["asleep", "blind", "cleaved", "confused", "covered in liquid", "dazed", "deep dreaming", "dioriented", "emboldened", "frenzied", "frozen", "gleaming", "greased", "hobbled", "inspired", "lost", "lovesick", "mutating", "overburdened", "paralyzed", "phased", "phosphorescent", "prone", "proselytized", "psionocially cleaved", "shaken", "shamed", "shimmering", "sitting", "sluggish", "sprinting", "stained by liquid", "stuck", "stunned", "stunned by gas", "submerged", "syphoned", "terrified", "wakeful"];
 const difficultyArr = ["Easy", "Average", "Tough", "Very Tough", "Impossible"];
 
@@ -28,7 +28,7 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
         healthStatus,
         statusEffects,
         difficulty,
-        weaponArr,
+
 
         titleCase(str) {
             return str.toLowerCase().split(' ').map(function (word) {
@@ -36,13 +36,42 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
             }).join(' ');
         },
 
+        randomNumber(range) {
+            return Math.floor(Math.random() * (range + 1));
+        },
+
+        getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        },
+
         generateTitle() {
-            const title = `${this.calling}`;
+            return `${this.calling} of the ${this.faction}`;
         },
 
         generateDifficulty() {
             return `${titleCase(this.affinity)}, ${titleCase(difficulty)}`;
+        },
+        
+        generateEquipment() {
+            let equipMessage = 'Equipped: ';
+            const equipRangedWeapon = getRandomElement(rangedWeaponArr);
+
+            const equipMeleeArr = [];
+            const numMelee = randomNumber(2);
+            for (let i = 0; i < numMelee; i++){
+                const material = getRandomElement(weaponMaterialArr);
+                const meleeWeapon = getRandomElement(meleeWeaponArr);
+                equipMeleeArr.push([material, meleeWeapon]);
+                
+                equipMessage += "" + material + " " + meleeWeapon + ", ";
+            }
+
+            equipMessage += "" + equipRangedWeapon;
+            return equipMessage;
+            
         }
 
     }
 }
+
+//console.log('hello');
