@@ -47,7 +47,7 @@ const characterFactory = () => {
         },
 
         generateTitle() {
-            return `${this.titleCase(this.calling)} of the ${this.faction}`;
+            return `${this.titleCase(this.calling)} of the ${this.titleCase(this.faction)}`;
         },
 
         generateDifficulty() {
@@ -72,7 +72,6 @@ const characterFactory = () => {
             this.equipment = equippedItems;
 
             equipMessage += "" + equipRangedWeapon;
-            console.log(equipMessage);
             return equipMessage;
         },
 
@@ -97,7 +96,6 @@ const characterFactory = () => {
                 }
             }
             this.statusEffects = activeStatusEffects;
-            console.log(statusEffectMessage);
             return statusEffectMessage;
         },
 
