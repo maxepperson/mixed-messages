@@ -110,7 +110,8 @@ const characterFactory = () => {
 
         generateDescription() {
             const characterDescription = `Across the ${this.environment}, the footsteps of the ${this.calling} reverberate like the lethargic chug of a machine. A lone wanderer from ${this.location} in the ${this.direction}, ${this.pronouns[2]} safe passage is affirmed only by the ${this.equipment[1]} clutched in ${this.pronouns[2]} grasping ${this.limbType}.`
-
+            this.description = characterDescription;
+            return characterDescription;
         },
 
         printMessage() {
@@ -119,7 +120,7 @@ const characterFactory = () => {
             const equipment = this.generateEquipment();
             const statusEffects = this.generateStatusEffects();
             const healthStatus = this.generateHealth();
-            const description = generateDescription();
+            const description = this.generateDescription();
 
             console.log(title);
             console.log(difficulty);
