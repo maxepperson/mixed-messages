@@ -33,8 +33,8 @@ const characterFactory = () => {
         affinity: pick(affinityArr),
         healthStatus: pick(healthStatusArr),
         difficulty: pick(difficultyArr),
-        statusEffects,
-        equipment,
+        statusEffects: [],
+        equipment: [],
 
         titleCase(str) {
             return str.toLowerCase().split(' ').map(function (word) {
