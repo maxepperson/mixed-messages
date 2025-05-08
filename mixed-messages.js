@@ -1,10 +1,12 @@
 const genderArr = ["man", "woman", "nonbinary", "agender"];
-const pronounsArr = [["he", "him", "his"], ["she", "her", "hers"], ["they", "them", "theirs"], ["it", "it", "its"]];
+const pronounsArr = [["he", "him", "his", "his"], ["she", "her", "her", "hers"], ["it", "it", "its", "its"]];
 
 const callingArr = ["apostle", "arconaut", "greybeard", "gunslinger", "marauder", "pilgrim", "nomad", "scholar", "tinker", "warden", "water merchant", "watervine farmer", ""];
 const limbTypeArr = ["arm", "claw", "hoof", "wing", "tentacle", "fin", "fungal outcrop"];
 
-const locationArr = ["Asphalt Mines", "Bethesda Susa", "Bey Lah", "Eyn Roj", "Ezra", "Garden of Geth", "Golgotha", "Grit Gate", "Gyl", "Joppa", "Kyakukya", "Omonporch", "Red Rock", "ruins of Joppa", "Rust Wells", "Rusted Archway", "Six Day Stilt", "Stiltgrounds", "the hydropon", "Thin World", "Tomb of the Eaters", "Trembling Dunes", "waterlogged tunnel", "Yd Freehold"];
+const locationArr = ["the Asphalt Mines", "Bethesda Susa", "Bey Lah", "Eyn Roj", "Ezra", "the Garden of Geth", "Golgotha", "the Grit Gate", "Gyl", "Joppa", "Kyakukya", "Omonporch", "Red Rock", "the ruins of Joppa", "the Rust Wells", "the Rusted Archway", "the Six Day Stilt", "the Stiltgrounds", "the hydropon", "the Thin World", "the Tomb of the Eaters", "the Trembling Dunes", "the waterlogged tunnel", "the Yd Freehold"];
+const directionArr = ["north", "south", "east", "west"];
+const environmentArr = ["salt dunes", "desert canyons", "salt marsh", "jungle", "flower fields", "hills", "mountains", "rust wells", "river", "ruins", "banana grove", "rainbow wood", "moon stair", "Palladium Reef"];
 const factionArr = ["Children of Mamon", "Consortium of Phyta", "Chavvah", "Cult of the Coiled Lamb", "Daughters of Exile", "dromad merchants", "cannibals", "Barathrumites", "Farmer's Guild", "Fellowship of Wardens", "Glow-Wights", "grazing hedonists", "Gyre wights", "hindren of Bey Lah", "Issachari tribe", "Mechanamists", "Merchants' Guild", "Naphtaali tribe", "pariahs", "Putus Templar", "Seekers of the Sightless Way", "Sultan cult", "water barons"];
 const affinityArr = ["friendly", "neutral", "hostile"];
 const difficultyArr = ["Easy", "Average", "Tough", "Very Tough", "Impossible"];
@@ -29,12 +31,15 @@ const characterFactory = () => {
         calling: pick(callingArr),
         limbType: pick(limbTypeArr),
         location: pick(locationArr),
+        direction: pick(directionArr),
+        environment: pick(environmentArr),
         faction: pick(factionArr),
         affinity: pick(affinityArr),
         healthStatus: pick(healthStatusArr),
         difficulty: pick(difficultyArr),
         statusEffects: [],
         equipment: [],
+        description: "",
 
         titleCase(str) {
             return str.toLowerCase().split(' ').map(function (word) {
@@ -42,8 +47,8 @@ const characterFactory = () => {
             }).join(' ');
         },
 
-        randomNumber(range) {
-            return Math.floor(Math.random() * (range + 1));
+        randomNumber(range, start = 0) {
+            return Math.floor(Math.random() * (range + 1) + start);
         },
 
         generateTitle() {
@@ -59,7 +64,7 @@ const characterFactory = () => {
             const equipRangedWeapon = getRandomElement(rangedWeaponArr);
 
             const equippedItems = [];
-            const numMelee = this.randomNumber(2);
+            const numMelee = this.randomNumber(2, 1);
             for (let i = 0; i < numMelee; i++){
                 const material = getRandomElement(weaponMaterialArr);
                 const meleeWeapon = getRandomElement(meleeWeaponArr);
@@ -78,7 +83,7 @@ const characterFactory = () => {
         generateStatusEffects() {
             let statusEffectMessage = "";
             const activeStatusEffects = [];
-            const numEffects = this.randomNumber(5);
+            const numEffects = this.randomNumber(3);
 
             for (let i = 0; i < numEffects; i++){
                 let currentEffect = getRandomElement(statusEffectsArr);
@@ -99,11 +104,29 @@ const characterFactory = () => {
             return statusEffectMessage;
         },
 
+        generateHealth() {
+            return `${this.titleCase(this.healthStatus)}`;
+        },
+
+        generateDescription() {
+            const characterDescription = `Across the ${this.environment}, the footsteps of the ${this.calling} reverberate like the lethargic chug of a machine. A lone wanderer from ${this.location} in the ${this.direction}, ${this.pronouns[2]} safe passage is affirmed only by the ${this.equipment[1]} clutched in ${this.pronouns[2]} grasping ${this.limbType}.`
+
+        },
+
         printMessage() {
-            console.log(this.generateTitle());
-            console.log(this.generateDifficulty())
-            console.log(this.generateEquipment());
-            console.log(this.generateStatusEffects());
+            const title = this.generateTitle();
+            const difficulty = this.generateDifficulty();
+            const equipment = this.generateEquipment();
+            const statusEffects = this.generateStatusEffects();
+            const healthStatus = this.generateHealth();
+            const description = generateDescription();
+
+            console.log(title);
+            console.log(difficulty);
+            console.log(description);
+            console.log(equipment);
+            console.log(statusEffects);
+            console.log(healthStatus);
         }
     }
 }
