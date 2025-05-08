@@ -59,7 +59,7 @@ const characterFactory = () => {
             const equipRangedWeapon = getRandomElement(rangedWeaponArr);
 
             const equippedItems = [];
-            const numMelee = randomNumber(2);
+            const numMelee = this.randomNumber(2);
             for (let i = 0; i < numMelee; i++){
                 const material = getRandomElement(weaponMaterialArr);
                 const meleeWeapon = getRandomElement(meleeWeaponArr);
@@ -79,7 +79,7 @@ const characterFactory = () => {
         generateStatusEffects() {
             let statusEffectMessage = "";
             const activeStatusEffects = [];
-            const numEffects = randomNumber(5);
+            const numEffects = this.randomNumber(5);
 
             for (let i = 0; i < numEffects; i++){
                 let currentEffect = getRandomElement(statusEffectsArr);
