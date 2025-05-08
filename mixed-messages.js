@@ -47,11 +47,11 @@ const characterFactory = () => {
         },
 
         generateTitle() {
-            return `${titleCase(this.calling)} of the ${this.faction}`;
+            return `${this.titleCase(this.calling)} of the ${this.faction}`;
         },
 
         generateDifficulty() {
-            return `${titleCase(this.affinity)}, ${titleCase(difficulty)}`;
+            return `${this.titleCase(this.affinity)}, ${this.titleCase(difficulty)}`;
         },
         
         generateEquipment() {
@@ -102,10 +102,10 @@ const characterFactory = () => {
         },
 
         printMessage() {
-            console.log(generateTitle());
-            console.log(generateDifficulty())
-            console.log(generateEquipment());
-            console.log(generateStatusEffects());
+            console.log(this.generateTitle());
+            console.log(this.generateDifficulty())
+            console.log(this.generateEquipment());
+            console.log(this.generateStatusEffects());
         }
     }
 }
