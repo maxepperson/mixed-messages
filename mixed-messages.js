@@ -109,7 +109,7 @@ const characterFactory = () => {
         },
 
         generateDescription() {
-            const characterDescription = `Across the ${this.environment}, the footsteps of the ${this.calling} reverberate like the lethargic chug of a machine. A lone wanderer from ${this.location} in the ${this.direction}, ${this.pronouns[2]} safe passage is affirmed only by the ${this.equipment[1]} clutched in ${this.pronouns[2]} grasping ${this.limbType}.`
+            const characterDescription = `Across the ${this.environment}, the footsteps of the ${this.calling} reverberate like the lethargic chug of a machine. A lone wanderer from ${this.location} in the ${this.direction}, ${this.pronouns[2]} safe passage is affirmed only by the ${this.equipment[0][1]} clutched in ${this.pronouns[2]} grasping ${this.limbType}.`
             this.description = characterDescription;
             return characterDescription;
         },
