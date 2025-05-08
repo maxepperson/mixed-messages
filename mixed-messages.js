@@ -7,28 +7,34 @@ const limbTypeArr = ["arm", "claw", "hoof", "wing", "tentacle", "fin", "fungal o
 const locationArr = ["Asphalt Mines", "Bethesda Susa", "Bey Lah", "Eyn Roj", "Ezra", "Garden of Geth", "Golgotha", "Grit Gate", "Gyl", "Joppa", "Kyakukya", "Omonporch", "Red Rock", "ruins of Joppa", "Rust Wells", "Rusted Archway", "Six Day Stilt", "Stiltgrounds", "the hydropon", "Thin World", "Tomb of the Eaters", "Trembling Dunes", "waterlogged tunnel", "Yd Freehold"];
 const factionArr = ["Children of Mamon", "Consortium of Phyta", "Chavvah", "Cult of the Coiled Lamb", "Daughters of Exile", "dromad merchants", "cannibals", "Barathrumites", "Farmer's Guild", "Fellowship of Wardens", "Glow-Wights", "grazing hedonists", "Gyre wights", "hindren of Bey Lah", "Issachari tribe", "Mechanamists", "Merchants' Guild", "Naphtaali tribe", "pariahs", "Putus Templar", "Seekers of the Sightless Way", "Sultan cult", "water barons"];
 const affinityArr = ["friendly", "neutral", "hostile"];
-const healthStatusArr = ["perfect", "fine", "injured", "wounded", "badly wounded"];
-const statusEffectsArr = ["asleep", "blind", "cleaved", "confused", "covered in liquid", "dazed", "deep dreaming", "dioriented", "emboldened", "frenzied", "frozen", "gleaming", "greased", "hobbled", "inspired", "lost", "lovesick", "mutating", "overburdened", "paralyzed", "phased", "phosphorescent", "prone", "proselytized", "psionocially cleaved", "shaken", "shamed", "shimmering", "sitting", "sluggish", "sprinting", "stained by liquid", "stuck", "stunned", "stunned by gas", "submerged", "syphoned", "terrified", "wakeful"];
 const difficultyArr = ["Easy", "Average", "Tough", "Very Tough", "Impossible"];
+const healthStatusArr = ["perfect", "fine", "injured", "wounded", "badly wounded"];
+
+const statusEffectsArr = ["asleep", "blind", "cleaved", "confused", "covered in liquid", "dazed", "deep dreaming", "dioriented", "emboldened", "frenzied", "frozen", "gleaming", "greased", "hobbled", "inspired", "lost", "lovesick", "mutating", "overburdened", "paralyzed", "phased", "phosphorescent", "prone", "proselytized", "psionocially cleaved", "shaken", "shamed", "shimmering", "sitting", "sluggish", "sprinting", "stained by liquid", "stuck", "stunned", "stunned by gas", "submerged", "syphoned", "terrified", "wakeful"];
 
 const meleeWeaponArr = ["pickaxe", "hand axe", "vinereaper", "battle axe", "mace", "staff", "hammer", "club", "wrench", "baton", "war hammer", "maul", "long sword", "great sword", "dagger", "kris", "utility knife", "kukri", "butcher knife", "cleaver", "wristblade"];
 const weaponMaterialArr = ["bronze", "iron", "steel", "carbide", "fullerite", "crysteel", "zetachrome"];
 const rangedWeaponArr = ["short bow", "compound bow", "musket", "Issachar rifle", "combat shotgun", "pump shotgun", "sniper rifle", "carbine", "laser rifle", "freeze ray", "eigenrifle", "hypertractor", "light rail", "spaser rifle", "dart gun", "booster gun", "chrome revolver", "grappling gun", "semi-automatic pistrol", "laser pistol", "chain pistol", "arc winder", "eigenpistol", "nullray pistol", "di-thermo beam", "hand rail", "high-voltage arc winder", "psychal fleshgun", "space inverter", "spaser pistol", "grenade launcher", "fungicide pump", "defoilant pump", "chaingun", "mortar tube", "missile launcher", "flamerthrower", "arc cannon", "chain laser", "blast cannon", "linear cannon", "swarm rack", "phase cannon"];
 
+const getRandomElement = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
-const characterFactory = (gender, pronouns, calling, limbType, location, faction, affinity, healthStatus, statusEffects, difficulty, weaponArr, equipmentArr) => {
+const pick = getRandomElement;
+
+const characterFactory = () => {
     return {
-        gender,
-        pronouns,
-        calling,
-        limbType,
-        location,
-        faction,
-        affinity,
-        healthStatus,
+        gender: pick(genderArr),
+        pronouns: pick (pronounsArr),
+        calling: pick(callingArr),
+        limbType: pick(limbTypeArr),
+        location: pick(locationArr),
+        faction: pick(factionArr),
+        affinity: pick(affinityArr),
+        healthStatus: pick(healthStatusArr),
+        difficulty: pick(difficultyArr),
         statusEffects,
-        difficulty,
-
+        equipment,
 
         titleCase(str) {
             return str.toLowerCase().split(' ').map(function (word) {
@@ -40,12 +46,8 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
             return Math.floor(Math.random() * (range + 1));
         },
 
-        getRandomElement(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        },
-
         generateTitle() {
-            return `${this.calling} of the ${this.faction}`;
+            return `${titleCase(this.calling)} of the ${this.faction}`;
         },
 
         generateDifficulty() {
@@ -56,15 +58,18 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
             let equipMessage = "Equipped: ";
             const equipRangedWeapon = getRandomElement(rangedWeaponArr);
 
-            const equipMeleeArr = [];
+            const equippedItems = [];
             const numMelee = randomNumber(2);
             for (let i = 0; i < numMelee; i++){
                 const material = getRandomElement(weaponMaterialArr);
                 const meleeWeapon = getRandomElement(meleeWeaponArr);
-                equipMeleeArr.push([material, meleeWeapon]);
+                equippedItems.push([material, meleeWeapon]);
                 
                 equipMessage += "" + material + " " + meleeWeapon + ", ";
             }
+
+            equippedItems.push(equipRangedWeapon);
+            this.equipment = equippedItems;
 
             equipMessage += "" + equipRangedWeapon;
             console.log(equipMessages);
@@ -91,10 +96,20 @@ const characterFactory = (gender, pronouns, calling, limbType, location, faction
                     statusEffectMessage += "" + currentEffect + ", ";
                 }
             }
+            this.statusEffects = activeStatusEffects;
             console.log(statusEffectMessage);
             return statusEffectMessage;
+        },
+
+        printMessage() {
+            console.log(generateTitle());
+            console.log(generateDifficulty())
+            console.log(generateEquipment());
+            console.log(generateStatusEffects());
         }
     }
 }
+
+const newCharacter = characterFactory();
 
 console.log('hello');
