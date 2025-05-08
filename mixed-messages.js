@@ -51,7 +51,7 @@ const characterFactory = () => {
         },
 
         generateDifficulty() {
-            return `${this.titleCase(this.affinity)}, ${this.titleCase(difficulty)}`;
+            return `${this.titleCase(this.affinity)}, ${this.titleCase(this.difficulty)}`;
         },
         
         generateEquipment() {
