@@ -112,4 +112,6 @@ const characterFactory = () => {
 
 const newCharacter = characterFactory();
 
+newCharacter.printMessage();
+
 console.log('hello');
