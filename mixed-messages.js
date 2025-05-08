@@ -72,7 +72,7 @@ const characterFactory = () => {
             this.equipment = equippedItems;
 
             equipMessage += "" + equipRangedWeapon;
-            console.log(equipMessages);
+            console.log(equipMessage);
             return equipMessage;
         },
 
